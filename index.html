@@ -119,14 +119,18 @@ const URL_APPS_SCRIPT = 'https://script.google.com/macros/s/AKfycbyXm_4kbfUmSY-w
     }
 
     function guardarMovimiento() {
-      const producto = document.getElementById('productoEncontrado').value;
-      const tipo = document.getElementById('tipo').value;
-      const cantidad = parseInt(document.getElementById('cantidad').value, 10);
+  const producto = document.getElementById('productoEncontrado').value;
+  const tipo = document.getElementById('tipo').value;
+  const cantidad = parseInt(document.getElementById('cantidad').value, 10);
 
-      if (!cantidad || cantidad <= 0) {
-        alert('Ingresá una cantidad válida');
-        return;
-      }
+  if (isNaN(cantidad) || cantidad < 0) {
+    alert('Ingresá una cantidad válida');
+    return;
+  }
+  if (tipo !== 'Ajuste por conteo' && cantidad <= 0) {
+    alert('Para Entrada o Salida, la cantidad debe ser mayor a 0');
+    return;
+  }
 
       document.getElementById('mensaje').innerHTML = 'Guardando...';
 
